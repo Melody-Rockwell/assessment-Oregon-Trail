@@ -17,8 +17,8 @@ class Traveler {
 }
 
 class Wagon {
-  constructor(c) {
-    this.capacity = c;
+  constructor(max) {
+    this.capacity = max;
     this.passengers = [];
   }
   getAvailableSeatCount() {
@@ -26,14 +26,18 @@ class Wagon {
   }
 
   join(traveler) {
-    if (this.passengers.length < this.capacity) {
+    if (this.getAvailableSeatCount() > 0) {
       this.passengers.push(traveler);
     }
   }
   shouldQuarantine() {
     for (let i = 0; i < this.passengers.length; i++) {
-      return true;
+      // console.log(this.passengers[i].isHealthy);
+      if (this.passengers[i].isHealthy === false) {
+        return true;
+      }
     }
+    return false;
   }
 
   totalFood() {

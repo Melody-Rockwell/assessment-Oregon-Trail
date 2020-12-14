@@ -9,7 +9,7 @@ class Traveler {
   }
   eat() {
     if (this.food < 1) {
-      this.isHeathly = false;
+      this.isHealthy = false;
     } else if (this.food >= 1) {
       this.food = this.food - 1;
     }
@@ -21,8 +21,24 @@ class Wagon {
     this.capacity = c;
     this.passengers = [];
   }
-  getAvailableSeatCount() {}
-  join(traveler) {}
-  shouldQuarantine() {}
-  totalFood() {}
+  getAvailableSeatCount() {
+    return this.capacity - this.passengers.length;
+  }
+
+  join(traveler) {
+    if (this.passengers.length < this.capacity) {
+      this.passengers.push(traveler);
+    }
+  }
+  shouldQuarantine() {
+    for (let i = 0; i < this.passengers.length; i++) {
+      return true;
+    }
+  }
+
+  totalFood() {
+    for (let i = 0; i < this.passengers.length; i++) {
+      return this.passengers[i].food;
+    }
+  }
 }
